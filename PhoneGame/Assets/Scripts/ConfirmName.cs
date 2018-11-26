@@ -47,16 +47,17 @@ public class ConfirmName : MonoBehaviour {
 				GreetingText.GetComponent<Text> ().text = "Player Four,\n Enter your name";
 				break;
 			case 3:
+				GreetingText.GetComponent<Text> ().text = "Player One,\n Enter your name";
 				break;
 
 			}
-
-			if(curPlayer == 3){
+			curPlayer++;
+			if(curPlayer >= 4){
 				NextScene.SetActive (true);
 				NamePromptScene.SetActive (false);
 				curPlayer = 0;
 			}
-			curPlayer++;
+
 		}
 
 

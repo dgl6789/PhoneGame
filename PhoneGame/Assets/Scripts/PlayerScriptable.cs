@@ -8,4 +8,9 @@ public class PlayerScriptable : ScriptableObject {
 	public int playerNum = 0; //this can be used to determine groups for games
 	public bool activePlayer; //is it the player's turn
 	public int Score = 0; //Add to this when challenges complee
+
+	public void addScore(){
+		Score += 50;
+	}
+
 }
