@@ -13,14 +13,16 @@ public class QR_Code : MonoBehaviour {
     public Text text;
     public GameObject qrScreen;
     public GameObject challengeScreen;
-    //public Vector2 size = new Vector2(300, 300);
-    //Vector2 pos = new Vector2(600, 600);
-    //Vector2 pivot;
-    //public float angle = 90;
+    public Transform qrLocation;
+    private Vector2 size = new Vector2(1000, 1000);
+    Vector2 pos = new Vector2(Screen.height * .25f, Screen.width * .25f);
+    Vector2 pivot;
+    public float angle = 90;
 
     void Start()
     {
-        screenRect = new Rect(0, 0, Screen.width, Screen.height);
+        //screenRect = new Rect(0, 0, Screen.width, Screen.height);
+        UpdateSettings();
         camTexture = new WebCamTexture();
         camTexture.requestedHeight = Screen.height;
         camTexture.requestedWidth = Screen.width;
@@ -28,25 +30,23 @@ public class QR_Code : MonoBehaviour {
         {
             camTexture.Play();
         }
-        //UpdateSettings();
 
     }
 
-    //void UpdateSettings()
-    //{
-    //    //pos = new Vector2(transform.localPosition.x, transform.localPosition.y);
-    //    screenRect = new Rect(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f, size.x, size.y);
-    //    pivot = new Vector2(screenRect.xMin + screenRect.width * 0.5f, screenRect.yMin + screenRect.height * 0.5f);
-    //}
+    void UpdateSettings()
+    {
+        pos = qrLocation.position;
+        screenRect = new Rect(pos.x - size.x * .5f, pos.y - size.y * .5f, size.x, size.y);
+        pivot = new Vector2(screenRect.xMin + screenRect.width * 0.5f, screenRect.yMin + screenRect.height * 0.5f);
+    }
 
     void OnGUI()
     {
-        // drawing the camera on screen
-        //GUIUtility.RotateAroundPivot(90, new Vector2(0, 0 ));
-        //Matrix4x4 matrixBackup = GUI.matrix;
-        //GUIUtility.RotateAroundPivot(angle, pivot);
-        GUI.DrawTexture(screenRect, camTexture, ScaleMode.ScaleToFit);
-        //GUI.matrix = matrixBackup;
+        // draw4ing the camera on screen
+        Matrix4x4 matrixBackup = GUI.matrix;
+        GUIUtility.RotateAroundPivot(angle, pivot);
+        GUI.DrawTexture(screenRect, camTexture);
+        GUI.matrix = matrixBackup;
         // do the reading — you might want to attempt to read less often than you draw on the screen for performance sake
         try
         {
