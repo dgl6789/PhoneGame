@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour {
+    public static GameManager instance = null;
     public Challenges challenges;
     [SerializeField]
     Text gameName;
@@ -11,44 +12,89 @@ public class GameManager : MonoBehaviour {
     Text instructions;
 
     void Start () {
+        //Instance gamemanager on start
+        if (instance == null)
+            instance = this;
+
         challenges = new Challenges();
         ParseChallenges();
 
-        foreach(string challenge in challenges.AllSolo)
+        foreach(string challenge in challenges.TwovTwo)
         {
             Debug.Log(challenge);
         }
 	}
 	
 
-    public void SelectGame()
+    public void SelectGame(string selection)
     {
         int game = Random.Range(1, 4);
         int range = 0;
         string[] data;
-        switch (game)
+        switch (selection)
         {
-            case 1:
-                range = Random.Range(0, challenges.XvX.Count);
-                data = challenges.XvX[range].Split('|');
+            case "onevone":
+                range = Random.Range(0, challenges.OnevOne.Count);
+                data = challenges.OnevOne[range].Split('|');
                 gameName.text = data[0];
                 instructions.text = data[1];
                 break;
-            case 2:
-                range = Random.Range(0, challenges.AllSolo.Count);
-                data = challenges.AllSolo[range].Split('|');
+            case "twovtwo":
+                range = Random.Range(0, challenges.TwovTwo.Count);
+                data = challenges.TwovTwo[range].Split('|');
                 gameName.text = data[0];
                 instructions.text = data[1];
                 break;
-            case 3:
-                //range = Random.Range(0, challenges.Solo.Count);
-                data = challenges.Solo[0].Split('|');
+            case "onevall":
+                range = Random.Range(0, challenges.OnevAll.Count);
+                data = challenges.OnevAll[range].Split('|');
+                gameName.text = data[0];
+                instructions.text = data[1];
+                break;
+            case "royale":
+                range = Random.Range(0, challenges.Royale.Count);
+                data = challenges.Royale[0].Split('|');
                 gameName.text = data[0];
                 instructions.text = data[1];
                 break;
             default:
-                gameName.text = "Resetting Data: Try Again";
-                instructions.text = "Resetting";
+                RandomChallenge();
+                break;
+        }
+    }
+
+    public void RandomChallenge()
+    {
+        int range = Random.Range(0, 4);
+        string[] data;
+        switch (range)
+        {
+            case 0:
+                range = Random.Range(0, challenges.OnevOne.Count);
+                data = challenges.OnevOne[range].Split('|');
+                gameName.text = data[0];
+                instructions.text = data[1];
+                break;
+            case 1:
+                range = Random.Range(0, challenges.TwovTwo.Count);
+                data = challenges.TwovTwo[range].Split('|');
+                gameName.text = data[0];
+                instructions.text = data[1];
+                break;
+            case 2:
+                range = Random.Range(0, challenges.OnevAll.Count);
+                data = challenges.OnevAll[range].Split('|');
+                gameName.text = data[0];
+                instructions.text = data[1];
+                break;
+            case 3:
+                range = Random.Range(0, challenges.Royale.Count);
+                data = challenges.Royale[0].Split('|');
+                gameName.text = data[0];
+                instructions.text = data[1];
+                break;
+            default:
+                Debug.Log("Error: Data isn't able to be parse and presented to the user");
                 break;
         }
     }
@@ -62,24 +108,27 @@ public class GameManager : MonoBehaviour {
         for(int i = 1; i < data.Length; i++)
         {
             string[] row = data[i].Split(',');
-            if (row[0] != "" || row[0] != "\r") challenges.XvX.Add(row[0]);
-            if (row[1] != "" || row[1] != "\r") challenges.AllSolo.Add(row[1]);
-            if (row[2] != "" || row[2] != "\r") challenges.Solo.Add(row[2]);
+            if (row[0] != "" || row[0] != " " || row[0] != "\r") challenges.OnevOne.Add(row[0]);
+            if (row[1] != "" || row[1] != " " || row[1] != "\r") challenges.TwovTwo.Add(row[1]);
+            if (row[2] != "" || row[2] != " " || row[2] != "\r") challenges.OnevAll.Add(row[2]);
+            if (row[3] != "" || row[3] != " " || row[3] != "\r") challenges.Royale.Add(row[3]);
         }
     }
 }
 
 public class Challenges
 {
-    public List<string> XvX;
-    public List<string> AllSolo;
-    public List<string> Solo;
+    public List<string> OnevOne;
+    public List<string> TwovTwo;
+    public List<string> OnevAll;
+    public List<string> Royale;
 
     public Challenges()
     {
-        XvX = new List<string>();
-        AllSolo = new List<string>();
-        Solo = new List<string>();
+        OnevOne = new List<string>();
+        TwovTwo = new List<string>();
+        OnevAll = new List<string>();
+        Royale = new List<string>();
     }
 }
 
