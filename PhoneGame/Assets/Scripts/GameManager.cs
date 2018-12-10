@@ -108,10 +108,11 @@ public class GameManager : MonoBehaviour {
         for(int i = 1; i < data.Length; i++)
         {
             string[] row = data[i].Split(',');
-            if (row[0] != "" || row[0] != " " || row[0] != "\r") challenges.OnevOne.Add(row[0]);
-            if (row[1] != "" || row[1] != " " || row[1] != "\r") challenges.TwovTwo.Add(row[1]);
-            if (row[2] != "" || row[2] != " " || row[2] != "\r") challenges.OnevAll.Add(row[2]);
-            if (row[3] != "" || row[3] != " " || row[3] != "\r") challenges.Royale.Add(row[3]);
+            if (row.Length < 4) continue;
+            if (row[0] != "" && row[0] != " " && row[0] != "\r") challenges.OnevOne.Add(row[0]);
+            if (row[1] != "" && row[1] != " " && row[1] != "\r") challenges.TwovTwo.Add(row[1]);
+            if (row[2] != "" && row[2] != " " && row[2] != "\r") challenges.OnevAll.Add(row[2]);
+            if (row[3] != "" && row[3] != " " && row[3] != "\r") challenges.Royale.Add(row[3]);
         }
     }
 }
