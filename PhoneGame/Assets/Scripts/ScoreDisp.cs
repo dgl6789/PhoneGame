@@ -27,7 +27,7 @@ public class ScoreDisp : MonoBehaviour {
 
 	public void onClick () {
 		for(int i = 0; i<playerList.Count; i++){
-			Debug.Log (i);
+			//Debug.Log (i);
 			if(playerList[i].activePlayer == true){
 				scores [i].text = playerList [i].name +":   " + playerList [i].Score;
 				
@@ -50,7 +50,7 @@ public class ScoreDisp : MonoBehaviour {
 
 	public void updateAll () {
 		for(int i = 0; i<playerList.Count; i++){
-			Debug.Log (i);
+			//Debug.Log (i);
 			scores [i].text = playerList [i].name +":   " + playerList [i].Score;
 
 			}
