@@ -15,13 +15,18 @@ public class ConfirmName : MonoBehaviour {
 	InputField input;
 
 
-	[SerializeField] GameObject PlayerHolder;
-	LoadPlayers playerObjects;
+	[SerializeField] GameObject playerHolder;
+	//LoadPlayers playerObjects;
 	int curPlayer = 0;
+
+
+	List<PlayerScriptable>  playerList;
+
 
 	// Use this for initialization
 	void Start () {
-		playerObjects = PlayerHolder.GetComponent<LoadPlayers> ();
+		playerList = playerHolder.GetComponent<LoadPlayers> ().players;
+		//playerObjects = PlayerHolder.GetComponent<LoadPlayers> ();
 		input = InputFieldHolder.GetComponent<InputField> ();
 	}
 	
@@ -31,8 +36,8 @@ public class ConfirmName : MonoBehaviour {
 	}
 
 	public void onClick(){
-		if(curPlayer < playerObjects.players.Count){
-			playerObjects.players[curPlayer].name = input.text;
+		if(curPlayer < playerList.Count){
+			playerList[curPlayer].name = input.text;
 			input.text = null;
 
 
