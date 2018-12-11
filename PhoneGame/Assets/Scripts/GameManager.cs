@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour {
 
     void ParseChallenges()
     {
-        TextAsset challengeData = Resources.Load<TextAsset>("ChallengeData1");
+        TextAsset challengeData = Resources.Load<TextAsset>("ChallengeData");
 
         string[] data = challengeData.text.Split('\n');
 
