@@ -10,14 +10,13 @@ public class QR_Code : MonoBehaviour {
 
     private WebCamTexture camTexture;
     private Rect screenRect;
-    public Text text;
     public GameObject qrScreen;
     public GameObject challengeScreen;
     public Transform qrLocation;
     private Vector2 size = new Vector2(1000, 1000);
     Vector2 pos = new Vector2(Screen.height * .25f, Screen.width * .25f);
     Vector2 pivot;
-    public float angle = 90;
+    float angle = 90;
 
     void Start()
     {
@@ -58,7 +57,6 @@ public class QR_Code : MonoBehaviour {
             {
                 Debug.Log("DECODED TEXT FROM QR: " +result.Text);
                 GameManager.instance.SelectGame(result.Text);
-                text.text = result.Text;
                 qrScreen.SetActive(false);
                 challengeScreen.SetActive(true);
             }
